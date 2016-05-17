@@ -56,6 +56,9 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
             throw new Exception("Empleado ya existe.");
         }
         else{
+            if(empleado.getIdcargo().getDescripcion().equals("GERENTE GENERAL")){
+                throw new Exception("Ya existe un Empleado Gerente General.");
+            }
             empleadoDAO.create(empleado);
         }
     }

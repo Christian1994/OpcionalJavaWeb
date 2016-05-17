@@ -128,11 +128,11 @@ public class EmpleadoVista {
         this.txtEdad = txtEdad;
     }
 
-    public SelectOneMenu getCmbEmpleados() {
+    public SelectOneMenu getCmbCargos() {
         return cmbCargos;
     }
 
-    public void setCmbEmpleados(SelectOneMenu cmbCargos) {
+    public void setCmbCargos(SelectOneMenu cmbCargos) {
         this.cmbCargos = cmbCargos;
     }
 
@@ -277,16 +277,50 @@ public class EmpleadoVista {
     }    
 
     public void action_registrar(){
-        
+        try {
+            Cargo objCargo = new Cargo();
+            try { objCargo.setIdcargo(Integer.parseInt(this.cmbCargos.getValue().toString())); } catch(Exception ex) {}
+            Ciudad objCiudad = new Ciudad();
+            try { objCiudad.setIdciudad(this.cmbCiudades.getValue().toString()); } catch(Exception ex) {}
+            Empleado objEmpleado = new Empleado();
+            objEmpleado.setIdempleado(Integer.parseInt(txtIdEmpleado.getValue().toString()));
+            objEmpleado.setCodigo(Integer.parseInt(txtCodigo.getValue().toString()));
+            objEmpleado.setNombre(txtNombre.getValue().toString());
+            objEmpleado.setApellido(txtApellido.getValue().toString());
+            objEmpleado.setIdcargo(objCargo);
+            objEmpleado.setDireccion(txtDireccion.getValue().toString());
+            objEmpleado.setTelefono(txtTelefono.getValue().toString());
+            objEmpleado.setEmail(txtEmail.getValue().toString());
+            objEmpleado.setCodciudad(objCiudad);
+            objEmpleado.setEdad(Integer.parseInt(txtEdad.getValue().toString()));
+            empleadoLogica.registrarEmpleado(objEmpleado);
+        } catch (Exception ex) {
+            Logger.getLogger(EmpleadoVista.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void action_modificar(){
-        
-    }
-    
-    public void action_eliminar(){
-        
-    }
+        try {
+            Cargo objCargo = new Cargo();
+            try { objCargo.setIdcargo(Integer.parseInt(this.cmbCargos.getValue().toString())); } catch(Exception ex) {}
+            Ciudad objCiudad = new Ciudad();
+            try { objCiudad.setIdciudad(this.cmbCiudades.getValue().toString()); } catch(Exception ex) {}
+            Empleado objEmpleado = new Empleado();
+            objEmpleado.setIdempleado(Integer.parseInt(txtIdEmpleado.getValue().toString()));
+            objEmpleado.setCodigo(Integer.parseInt(txtCodigo.getValue().toString()));
+            objEmpleado.setNombre(txtNombre.getValue().toString());
+            objEmpleado.setApellido(txtApellido.getValue().toString());
+            objEmpleado.setIdcargo(objCargo);
+            objEmpleado.setDireccion(txtDireccion.getValue().toString());
+            objEmpleado.setTelefono(txtTelefono.getValue().toString());
+            objEmpleado.setEmail(txtEmail.getValue().toString());
+            objEmpleado.setCodciudad(objCiudad);
+            objEmpleado.setEdad(Integer.parseInt(txtEdad.getValue().toString()));
+            empleadoLogica.modificarEmpleado(objEmpleado);
+        } catch (Exception ex) {
+            Logger.getLogger(EmpleadoVista.class.getName()).log(Level.SEVERE, null, ex);
+        }        
+    }    
     
     /**
      * Creates a new instance of EmpleadoVista

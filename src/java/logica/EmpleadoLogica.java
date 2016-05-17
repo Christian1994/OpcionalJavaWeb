@@ -59,7 +59,7 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
     }
 
     @Override
-    public void modificarEmpelado(Empleado empleado) throws Exception {
+    public void modificarEmpleado(Empleado empleado) throws Exception {
         
         // Campo Código Empleado se validará en la Vista Empleado.
         

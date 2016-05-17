@@ -1,0 +1,135 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Empleados</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    GESTIÓN DE EMPLEADOS
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    CHRISTIAN DAVID NOREÑA VALENCIA
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Resources">
+                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                            </p:submenu>
+
+                        </p:menu>
+                    </h:form>    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="formulario">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:panelGrid columns="6">
+                            <h:outputText value="ID Empleado"/>
+                            <p:inputText id="txtIdEmpleado" binding="#{empleadoVista.txtIdEmpleado}" />
+
+                            <h:outputText value="Código"/>
+                            <p:inputText id="txtCodigo" binding="#{empleadoVista.txtCodigo}" />
+                            
+                            <h:outputText value="Nombre"/>
+                            <p:inputText id="txtNombre" binding="#{empleadoVista.txtNombre}" />
+                            
+                            <h:outputText value="Apellido"/>
+                            <p:inputText id="txtApellido" binding="#{empleadoVista.txtApellido}" />
+                            
+                            <h:outputText value="Cargo"/>
+                            <p:selectOneMenu id="cmbCargos" binding="#{empleadoVista.cmbCargos}">
+                                <f:selectItem itemValue="Seleccione" itemLabel="Seleccione"/>
+                                <f:selectItems value="#{empleadoVista.itemsCargos}"/>
+                            </p:selectOneMenu>
+                            
+                            <h:outputText value="Dirección"/>
+                            <p:inputText id="txtDireccion" binding="#{empleadoVista.txtDireccion}" />
+                            
+                            <h:outputText value="Teléfono"/>
+                            <p:inputText id="txtTelefono" binding="#{empleadoVista.txtTelefono}" />
+                            
+                            <h:outputText value="E-mail"/>
+                            <p:inputText id="txtEmail" binding="#{empleadoVista.txtEmail}" />
+                                         
+                            <h:outputText value="Ciudad"/>
+                            <p:selectOneMenu id="cmbCiudades" binding="#{empleadoVista.cmbCiudades}">
+                                <f:selectItem itemValue="Seleccione" itemLabel="Seleccione"/>
+                                <f:selectItems value="#{empleadoVista.itemsCiudades}"/>
+                            </p:selectOneMenu>     
+                            
+                            <h:outputText value="Edad"/>
+                            <p:inputText id="txtEdad" binding="#{empleadoVista.txtEdad}" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="3">
+                            <p:commandButton value="Registrar" binding="#{empleadoVista.btnRegistrar}" action="#{empleadoVista.action_registrar()}" update=":formulario"/>
+                            <p:commandButton value="Modificar" binding="#{empleadoVista.btnModificar}" action="#{empleadoVista.action_modificar()}" update=":formulario"/>
+                            <p:commandButton value="Limpiar" binding="#{empleadoVista.btnLimpiar}" action="#{empleadoVista.limpiar()}" update=":formulario"/>
+                        </p:panelGrid>
+                        <p:dataTable id="eventsDT" var="empleado" value="#{empleadoVista.listaEmpleados}" selectionMode="single" selection="#{empleadoVista.selectedEmpleado}" rowKey="#{empleado.idempleado}">
+                            <f:facet name="header">
+                                Empleados
+                            </f:facet>
+                            <p:ajax event="rowSelect" listener="#{empleadoVista.onRowSelect}" update=":formulario" />
+                            <p:column headerText="ID Empleado">
+                                <h:outputText value="#{empleado.idempleado}" />
+                            </p:column>
+                            <p:column headerText="Código">
+                                <h:outputText value="#{empleado.codigo}" />
+                            </p:column>
+                            <p:column headerText="Nombre">
+                                <h:outputText value="#{empleado.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Apellido">
+                                <h:outputText value="#{empleado.apellido}"/>
+                            </p:column>
+                            <p:column headerText="Cargo">
+                                <h:outputText value="#{empleado.idcargo.descripcion}"/>
+                            </p:column>
+                            <p:column headerText="Dirección">
+                                <h:outputText value="#{empleado.direccion}"/>
+                            </p:column>
+                            <p:column headerText="Telefono">
+                                <h:outputText value="#{empleado.telefono}"/>
+                            </p:column>
+                            <p:column headerText="E-mail">
+                                <h:outputText value="#{empleado.email}"/>
+                            </p:column>
+                            <p:column headerText="Ciudad">
+                                <h:outputText value="#{empleado.codciudad.nombre}"/>
+                            </p:column>
+                            <p:column headerText="Edad">
+                                <h:outputText value="#{empleado.edad}"/>
+                            </p:column>
+                            
+                        </p:dataTable>                        
+                    </h:form>    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+
+

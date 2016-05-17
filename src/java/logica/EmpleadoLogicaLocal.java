@@ -17,7 +17,7 @@ import modelo.Empleado;
 public interface EmpleadoLogicaLocal {
     
     public void registrarEmpleado(Empleado empleado) throws Exception;
-    public void modificarEmpelado(Empleado empleado) throws Exception;
+    public void modificarEmpleado(Empleado empleado) throws Exception;
     public List<Empleado> consultarEmpleados() throws Exception;
     
 }

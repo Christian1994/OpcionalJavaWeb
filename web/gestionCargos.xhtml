@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+    <f:view contentType="text/html">
+        <h:head>
+            <f:facet name="first">
+                <meta content='text/html; charset=UTF-8' http-equiv="Content-Type"/>
+                <title>Cargos</title>
+            </f:facet>
+        </h:head>
+
+        <h:body>
+
+            <p:layout fullPage="true">
+
+                <p:layoutUnit position="north" size="100" resizable="true" closable="true" collapsible="true">
+                    GESTIÓN DE CARGOS
+                </p:layoutUnit>
+
+                <p:layoutUnit position="south" size="100" closable="true" collapsible="true">
+                    CHRISTIAN DAVID NOREÑA VALENCIA
+                </p:layoutUnit>
+
+                <p:layoutUnit position="west" size="175" header="Left" collapsible="true">
+                    <h:form>
+                        <p:menu>
+                            <p:submenu label="Resources">
+                                <p:menuitem value="Demo" url="http://www.primefaces.org/showcase-labs/ui/home.jsf" />
+                                <p:menuitem value="Documentation" url="http://www.primefaces.org/documentation.html" />
+                                <p:menuitem value="Forum" url="http://forum.primefaces.org/" />
+                                <p:menuitem value="Themes" url="http://www.primefaces.org/themes.html" />
+
+                            </p:submenu>
+
+                        </p:menu>
+                    </h:form>    
+                </p:layoutUnit>
+
+                <p:layoutUnit position="center">
+                    <h:form id="formulario">
+                        <p:growl id="growl" showDetail="true" sticky="true" />
+                        <p:panelGrid columns="6">
+                            <h:outputText value="Código"/>
+                            <p:inputText id="txtIdCargo" binding="#{cargoVista.txtIdCargo}" />
+
+                            <h:outputText value="Descripción"/>
+                            <p:inputText id="txtDescripción" binding="#{cargoVista.txtDescripcion}" />
+                            
+                            <h:outputText value="Salario"/>
+                            <p:inputText id="txtSalario" binding="#{cargoVista.txtSalario}" />
+                        </p:panelGrid>
+                        <p:panelGrid columns="3">
+                            <p:commandButton value="Modificar" binding="#{cargoVista.btnModificar}" action="#{cargoVista.action_modificar()}" update=":formulario"/>
+                            <p:commandButton value="Eliminar" binding="#{cargoVista.btnEliminar}" action="#{cargoVista.action_eliminar()}" update=":formulario"/>
+                            <p:commandButton value="Limpiar" binding="#{cargoVista.btnLimpiar}" action="#{cargoVista.limpiar()}" update=":formulario"/>
+                        </p:panelGrid>
+                        <p:dataTable id="eventsDT" var="cargo" value="#{cargoVista.listaCargos}" selectionMode="single" selection="#{cargoVista.selectedCargo}" rowKey="#{cargo.idcargo}">
+                            <f:facet name="header">
+                                Cargos
+                            </f:facet>
+                            <p:ajax event="rowSelect" listener="#{cargoVista.onRowSelect}" update=":formulario" />
+                            <p:column headerText="ID">
+                                <h:outputText value="#{cargo.idcargo}" />
+                            </p:column>
+                            <p:column headerText="Descripción">
+                                <h:outputText value="#{cargo.descripcion}" />
+                            </p:column>
+                            <p:column headerText="Salario">
+                                <h:outputText value="#{cargo.salario}"/>
+                            </p:column>
+                        </p:dataTable>                        
+                    </h:form>    
+                </p:layoutUnit>
+
+            </p:layout>
+
+        </h:body>
+
+    </f:view>
+</html>
+

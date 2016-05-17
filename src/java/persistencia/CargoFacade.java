@@ -12,10 +12,11 @@ import modelo.Cargo;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Stateless
 public class CargoFacade extends AbstractFacade<Cargo> implements CargoFacadeLocal {
+
     @PersistenceContext(unitName = "OpcionalJavaWebPU")
     private EntityManager em;
 

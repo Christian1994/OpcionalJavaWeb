@@ -12,10 +12,11 @@ import modelo.Ciudad;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Stateless
 public class CiudadFacade extends AbstractFacade<Ciudad> implements CiudadFacadeLocal {
+
     @PersistenceContext(unitName = "OpcionalJavaWebPU")
     private EntityManager em;
 

@@ -11,7 +11,7 @@ import modelo.Admin;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Local
 public interface AdminFacadeLocal {

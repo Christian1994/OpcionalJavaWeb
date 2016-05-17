@@ -11,7 +11,7 @@ import modelo.Cargo;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Local
 public interface CargoFacadeLocal {

@@ -12,10 +12,11 @@ import modelo.Admin;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Stateless
 public class AdminFacade extends AbstractFacade<Admin> implements AdminFacadeLocal {
+
     @PersistenceContext(unitName = "OpcionalJavaWebPU")
     private EntityManager em;
 

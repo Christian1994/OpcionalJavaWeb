@@ -11,7 +11,7 @@ import modelo.Ciudad;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Local
 public interface CiudadFacadeLocal {

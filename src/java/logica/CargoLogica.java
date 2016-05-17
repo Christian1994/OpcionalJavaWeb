@@ -23,14 +23,11 @@ public class CargoLogica implements CargoLogicaLocal {
     
     @Override
     public void modificarCargo(Cargo cargo) throws Exception {
-        if(cargo.getIdcargo().equals("")){
-            throw new Exception("Campo ID Cargo Obligatorio.");
-        }
+        
         if(cargo.getDescripcion().equals("")){
             throw new Exception("Campo Descripción Cargo Obligatorio.");
         }
-        // Campo Salario Cargo se validará en la Vista de Cargo.
-        
+
         Cargo objCargo = cargoDAO.find(cargo.getIdcargo());
         if(objCargo == null){
             throw new Exception("Cargo a modificar no existe.");
@@ -49,7 +46,7 @@ public class CargoLogica implements CargoLogicaLocal {
             throw new Exception("Cargo a eliminar no existe.");
         }
         else{
-            if(cargo.getEmpleadoList().size() > 0){
+            if(objCargo.getEmpleadoList().size() > 0){
                 throw new Exception("El Cargo tiene Empleado asociados. Elíminelos primero.");
             }
             cargoDAO.remove(cargo);

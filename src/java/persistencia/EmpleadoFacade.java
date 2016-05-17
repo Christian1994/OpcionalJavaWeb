@@ -12,10 +12,11 @@ import modelo.Empleado;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Stateless
 public class EmpleadoFacade extends AbstractFacade<Empleado> implements EmpleadoFacadeLocal {
+
     @PersistenceContext(unitName = "OpcionalJavaWebPU")
     private EntityManager em;
 

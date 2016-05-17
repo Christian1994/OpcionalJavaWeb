@@ -8,7 +8,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Entity
-@Table(name = "ciudad")
+@Table(name = "ciudad", catalog = "bdopcional", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Ciudad.findAll", query = "SELECT c FROM Ciudad c"),
@@ -34,11 +33,12 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Ciudad.findByNombre", query = "SELECT c FROM Ciudad c WHERE c.nombre = :nombre"),
     @NamedQuery(name = "Ciudad.findByDepartamento", query = "SELECT c FROM Ciudad c WHERE c.departamento = :departamento")})
 public class Ciudad implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 3)
+    @Size(min = 1, max = 50)
     @Column(name = "idciudad")
     private String idciudad;
     @Basic(optional = false)
@@ -51,7 +51,7 @@ public class Ciudad implements Serializable {
     @Size(min = 1, max = 50)
     @Column(name = "departamento")
     private String departamento;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idciudad")
+    @OneToMany(mappedBy = "codciudad")
     private List<Empleado> empleadoList;
 
     public Ciudad() {

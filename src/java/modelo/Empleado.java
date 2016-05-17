@@ -21,13 +21,14 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Entity
-@Table(name = "empleado")
+@Table(name = "empleado", catalog = "bdopcional", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Empleado.findAll", query = "SELECT e FROM Empleado e"),
+    @NamedQuery(name = "Empleado.findByIdempleado", query = "SELECT e FROM Empleado e WHERE e.idempleado = :idempleado"),
     @NamedQuery(name = "Empleado.findByCodigo", query = "SELECT e FROM Empleado e WHERE e.codigo = :codigo"),
     @NamedQuery(name = "Empleado.findByNombre", query = "SELECT e FROM Empleado e WHERE e.nombre = :nombre"),
     @NamedQuery(name = "Empleado.findByApellido", query = "SELECT e FROM Empleado e WHERE e.apellido = :apellido"),
@@ -36,63 +37,53 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "Empleado.findByEmail", query = "SELECT e FROM Empleado e WHERE e.email = :email"),
     @NamedQuery(name = "Empleado.findByEdad", query = "SELECT e FROM Empleado e WHERE e.edad = :edad")})
 public class Empleado implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
+    @Column(name = "idempleado")
+    private Integer idempleado;
     @Column(name = "codigo")
     private Integer codigo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "nombre")
     private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "apellido")
     private String apellido;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "direccion")
     private String direccion;
-    @Basic(optional = false)
-    @NotNull
+    @Size(max = 50)
     @Column(name = "telefono")
-    private int telefono;
+    private String telefono;
     // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    @Size(max = 50)
     @Column(name = "email")
     private String email;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "edad")
-    private int edad;
+    private Integer edad;
     @JoinColumn(name = "idcargo", referencedColumnName = "idcargo")
-    @ManyToOne(optional = false)
+    @ManyToOne
     private Cargo idcargo;
-    @JoinColumn(name = "idciudad", referencedColumnName = "idciudad")
-    @ManyToOne(optional = false)
-    private Ciudad idciudad;
+    @JoinColumn(name = "codciudad", referencedColumnName = "idciudad")
+    @ManyToOne
+    private Ciudad codciudad;
 
     public Empleado() {
     }
 
-    public Empleado(Integer codigo) {
-        this.codigo = codigo;
+    public Empleado(Integer idempleado) {
+        this.idempleado = idempleado;
     }
 
-    public Empleado(Integer codigo, String nombre, String apellido, String direccion, int telefono, String email, int edad) {
-        this.codigo = codigo;
-        this.nombre = nombre;
-        this.apellido = apellido;
-        this.direccion = direccion;
-        this.telefono = telefono;
-        this.email = email;
-        this.edad = edad;
+    public Integer getIdempleado() {
+        return idempleado;
+    }
+
+    public void setIdempleado(Integer idempleado) {
+        this.idempleado = idempleado;
     }
 
     public Integer getCodigo() {
@@ -127,11 +118,11 @@ public class Empleado implements Serializable {
         this.direccion = direccion;
     }
 
-    public int getTelefono() {
+    public String getTelefono() {
         return telefono;
     }
 
-    public void setTelefono(int telefono) {
+    public void setTelefono(String telefono) {
         this.telefono = telefono;
     }
 
@@ -143,11 +134,11 @@ public class Empleado implements Serializable {
         this.email = email;
     }
 
-    public int getEdad() {
+    public Integer getEdad() {
         return edad;
     }
 
-    public void setEdad(int edad) {
+    public void setEdad(Integer edad) {
         this.edad = edad;
     }
 
@@ -159,18 +150,18 @@ public class Empleado implements Serializable {
         this.idcargo = idcargo;
     }
 
-    public Ciudad getIdciudad() {
-        return idciudad;
+    public Ciudad getCodciudad() {
+        return codciudad;
     }
 
-    public void setIdciudad(Ciudad idciudad) {
-        this.idciudad = idciudad;
+    public void setCodciudad(Ciudad codciudad) {
+        this.codciudad = codciudad;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (codigo != null ? codigo.hashCode() : 0);
+        hash += (idempleado != null ? idempleado.hashCode() : 0);
         return hash;
     }
 
@@ -181,7 +172,7 @@ public class Empleado implements Serializable {
             return false;
         }
         Empleado other = (Empleado) object;
-        if ((this.codigo == null && other.codigo != null) || (this.codigo != null && !this.codigo.equals(other.codigo))) {
+        if ((this.idempleado == null && other.idempleado != null) || (this.idempleado != null && !this.idempleado.equals(other.idempleado))) {
             return false;
         }
         return true;
@@ -189,7 +180,7 @@ public class Empleado implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Empleado[ codigo=" + codigo + " ]";
+        return "modelo.Empleado[ idempleado=" + idempleado + " ]";
     }
     
 }

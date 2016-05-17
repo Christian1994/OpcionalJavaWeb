@@ -8,7 +8,6 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -23,10 +22,10 @@ import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author AuxSala
+ * @author NOREÑA
  */
 @Entity
-@Table(name = "cargo")
+@Table(name = "cargo", catalog = "bdopcional", schema = "")
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Cargo.findAll", query = "SELECT c FROM Cargo c"),
@@ -34,43 +33,33 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cargo.findByDescripcion", query = "SELECT c FROM Cargo c WHERE c.descripcion = :descripcion"),
     @NamedQuery(name = "Cargo.findBySalario", query = "SELECT c FROM Cargo c WHERE c.salario = :salario")})
 public class Cargo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 3)
     @Column(name = "idcargo")
-    private String idcargo;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
+    private Integer idcargo;
+    @Size(max = 50)
     @Column(name = "descripcion")
     private String descripcion;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "salario")
-    private int salario;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "idcargo")
+    private Integer salario;
+    @OneToMany(mappedBy = "idcargo")
     private List<Empleado> empleadoList;
 
     public Cargo() {
     }
 
-    public Cargo(String idcargo) {
+    public Cargo(Integer idcargo) {
         this.idcargo = idcargo;
     }
 
-    public Cargo(String idcargo, String descripcion, int salario) {
-        this.idcargo = idcargo;
-        this.descripcion = descripcion;
-        this.salario = salario;
-    }
-
-    public String getIdcargo() {
+    public Integer getIdcargo() {
         return idcargo;
     }
 
-    public void setIdcargo(String idcargo) {
+    public void setIdcargo(Integer idcargo) {
         this.idcargo = idcargo;
     }
 
@@ -82,11 +71,11 @@ public class Cargo implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public int getSalario() {
+    public Integer getSalario() {
         return salario;
     }
 
-    public void setSalario(int salario) {
+    public void setSalario(Integer salario) {
         this.salario = salario;
     }
 

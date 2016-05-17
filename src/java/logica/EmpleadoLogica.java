@@ -47,7 +47,7 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
         if(empleado.getIdcargo().getIdcargo() == null){
             throw new Exception("Debes seleccionar el cargo al que el Empleado va a asociarse.");
         }
-        if(empleado.getIdciudad().getIdciudad() == null){
+        if(empleado.getCodciudad().getIdciudad() == null){
             throw new Exception("Debes seleccionar la ciudad en el que el Empleado vive.");
         }
         
@@ -86,7 +86,7 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
         if(empleado.getIdcargo().getIdcargo() == null){
             throw new Exception("Debes seleccionar el cargo al que el Empleado va a asociarse.");
         }
-        if(empleado.getIdciudad().getIdciudad() == null){
+        if(empleado.getCodciudad().getIdciudad() == null){
             throw new Exception("Debes seleccionar la ciudad en el que el Empleado vive.");
         }
         
@@ -102,7 +102,7 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
             objEmpleado.setEmail(empleado.getEmail());
             objEmpleado.setEdad(empleado.getEdad());
             objEmpleado.setIdcargo(empleado.getIdcargo());
-            objEmpleado.setIdciudad(empleado.getIdciudad());
+            objEmpleado.setCodciudad(empleado.getCodciudad());
             empleadoDAO.edit(empleado);
         }
     }

@@ -1,6 +1,6 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
--- Versión del servidor:         10.1.13-MariaDB - mariadb.org binary distribution
+-- Versión del servidor:         10.0.17-MariaDB - mariadb.org binary distribution
 -- SO del servidor:              Win32
 -- HeidiSQL Versión:             9.3.0.4984
 -- --------------------------------------------------------
@@ -22,7 +22,13 @@ CREATE TABLE IF NOT EXISTS `admin` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla bdopcional.admin: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `admin` DISABLE KEYS */;
+INSERT INTO `admin` (`id`, `clave`) VALUES
+	(1234, 'b1f37ec94d5ce01b55b89cec07183cef'),
+	(3333, 'b1f37ec94d5ce01b55b89cec07183cef'),
+	(5678, 'b1f37ec94d5ce01b55b89cec07183cef');
+/*!40000 ALTER TABLE `admin` ENABLE KEYS */;
 
 
 -- Volcando estructura para tabla bdopcional.cargo
@@ -33,7 +39,14 @@ CREATE TABLE IF NOT EXISTS `cargo` (
   PRIMARY KEY (`idcargo`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla bdopcional.cargo: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `cargo` DISABLE KEYS */;
+INSERT INTO `cargo` (`idcargo`, `descripcion`, `salario`) VALUES
+	('GGR', 'Gerente General', 2000000),
+	('ING', 'Ingeniero', 1500000),
+	('TCN', 'Técnico', 1000000),
+	('TEC', 'Tecnólogo', 1200000);
+/*!40000 ALTER TABLE `cargo` ENABLE KEYS */;
 
 
 -- Volcando estructura para tabla bdopcional.ciudad
@@ -44,7 +57,17 @@ CREATE TABLE IF NOT EXISTS `ciudad` (
   PRIMARY KEY (`idciudad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla bdopcional.ciudad: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `ciudad` DISABLE KEYS */;
+INSERT INTO `ciudad` (`idciudad`, `nombre`, `departamento`) VALUES
+	('BNV', 'Buenaventura', 'Valle del Cauca'),
+	('BOG', 'Bogotá', 'Cundinamarca'),
+	('CAL', 'Cali', 'Valle del Cauca'),
+	('MAN', 'Manizales', 'Caldas'),
+	('MED', 'Medellín', 'Antioquia'),
+	('SRC', 'Santa Rosa de Cabal', 'Risaralda'),
+	('TUL', 'Tuluá', 'Valle del Cauca');
+/*!40000 ALTER TABLE `ciudad` ENABLE KEYS */;
 
 
 -- Volcando estructura para tabla bdopcional.empleado
@@ -65,7 +88,14 @@ CREATE TABLE IF NOT EXISTS `empleado` (
   CONSTRAINT `fk_idciudad` FOREIGN KEY (`idciudad`) REFERENCES `ciudad` (`idciudad`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- La exportación de datos fue deseleccionada.
+-- Volcando datos para la tabla bdopcional.empleado: ~0 rows (aproximadamente)
+/*!40000 ALTER TABLE `empleado` DISABLE KEYS */;
+INSERT INTO `empleado` (`codigo`, `nombre`, `apellido`, `direccion`, `telefono`, `email`, `edad`, `idciudad`, `idcargo`) VALUES
+	(94367124, 'Luisa', 'Morales', 'Calle 72 No. 47A-02', 4512300, 'morlui86@hotmail.com', 30, 'MED', 'GGR'),
+	(1112098234, 'María', 'Giraldo', 'Carrera 25 No. 58-12', 8871234, 'girmar95@hotmail.com', 29, 'MAN', 'TCN'),
+	(1116265806, 'Christian', 'Noreña', 'Calle 39 No. 27A-29', 2262893, 'crisdanovagoodyear@hotmail.com', 21, 'TUL', 'ING'),
+	(1116285102, 'Carlos', 'Gómez', 'Calle 26 No. 6-12', 3312431, 'carlos.gomez@hotmail.com', 24, 'SRC', 'TEC');
+/*!40000 ALTER TABLE `empleado` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

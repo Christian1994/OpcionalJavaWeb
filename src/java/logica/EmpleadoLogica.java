@@ -24,8 +24,6 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
     @Override
     public void registrarEmpleado(Empleado empleado) throws Exception {
         
-        // Campo Código Empleado se validará en la Vista Empleado.
-        
         if(empleado.getNombre().equals("")){
             throw new Exception("Campo Nombre Empleado Obligatorio.");
         }
@@ -35,15 +33,12 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
         if(empleado.getDireccion().equals("")){
             throw new Exception("Campo Dirección Empleado Obligatorio.");
         }
-        
-        // Campo Teléfono Empleado se validará en la Vista Empleado.
-        
+        if(empleado.getTelefono().equals("")){
+            throw new Exception("Campo Teléfono Empleado Obligatorio.");
+        }
         if(empleado.getEmail().equals("")){
             throw new Exception("Campo E-mail Empleado Obligatorio.");
         }
-        
-        // Campo Edad Empleado se validará en la Vista Empleado.
-        
         if(empleado.getIdcargo().getIdcargo() == null){
             throw new Exception("Debes seleccionar el cargo al que el Empleado va a asociarse.");
         }

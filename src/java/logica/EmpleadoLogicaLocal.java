@@ -5,7 +5,9 @@
  */
 package logica;
 
+import java.util.List;
 import javax.ejb.Local;
+import modelo.Empleado;
 
 /**
  *
@@ -13,5 +15,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface EmpleadoLogicaLocal {
+    
+    public void registrarEmpleado(Empleado empleado) throws Exception;
+    public void modificarEmpelado(Empleado empleado) throws Exception;
+    public List<Empleado> consultarEmpleados() throws Exception;
     
 }

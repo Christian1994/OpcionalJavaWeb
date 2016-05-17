@@ -5,7 +5,9 @@
  */
 package logica;
 
+import java.util.List;
 import javax.ejb.Local;
+import modelo.Cargo;
 
 /**
  *
@@ -13,5 +15,9 @@ import javax.ejb.Local;
  */
 @Local
 public interface CargoLogicaLocal {
+
+    public void modificarCargo(Cargo cargo) throws Exception;
+    public void eliminarCargo(Cargo cargo) throws Exception;
+    public List<Cargo> consultarCargos() throws Exception;
     
 }

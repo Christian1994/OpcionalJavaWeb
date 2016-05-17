@@ -5,7 +5,9 @@
  */
 package logica;
 
+import java.util.List;
 import javax.ejb.Local;
+import modelo.Ciudad;
 
 /**
  *
@@ -14,4 +16,7 @@ import javax.ejb.Local;
 @Local
 public interface CiudadLogicaLocal {
     
+    public void registrarCiudad(Ciudad ciudad) throws Exception;
+    public List<Ciudad> consultarCiudades() throws Exception;
+    public String importarCiudades(String archivo) throws Exception;
 }

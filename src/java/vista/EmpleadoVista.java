@@ -11,7 +11,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.ejb.EJB;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+import javax.enterprise.context.RequestScoped;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.faces.model.SelectItem;
 import logica.CargoLogicaLocal;
 import logica.CiudadLogicaLocal;
@@ -29,7 +31,7 @@ import org.primefaces.event.SelectEvent;
  * @author NOREÑA
  */
 @Named(value = "empleadoVista")
-@Dependent
+@RequestScoped
 public class EmpleadoVista {
 
     @EJB
@@ -238,21 +240,19 @@ public class EmpleadoVista {
     public void onRowSelect(SelectEvent event){
         this.selectedEmpleado = (Empleado) event.getObject();
         
-        this.txtIdEmpleado.setValue(selectedEmpleado.getIdcargo());
+        this.txtIdEmpleado.setValue(selectedEmpleado.getIdempleado());
         this.txtCodigo.setValue(selectedEmpleado.getCodigo());
         this.txtNombre.setValue(selectedEmpleado.getNombre());
         this.txtApellido.setValue(selectedEmpleado.getApellido());
+        this.cmbCargos.setValue(selectedEmpleado.getIdcargo().getIdcargo());
         this.txtDireccion.setValue(selectedEmpleado.getDireccion());
         this.txtTelefono.setValue(selectedEmpleado.getTelefono());
         this.txtEmail.setValue(selectedEmpleado.getEmail());
+        this.cmbCiudades.setValue(selectedEmpleado.getCodciudad().getIdciudad());
         this.txtEdad.setValue(selectedEmpleado.getEdad());
-        
-        this.cmbCargos.setValue(selectedEmpleado.getIdcargo().getDescripcion());
-        this.cmbCiudades.setValue(selectedEmpleado.getCodciudad().getNombre());
         
         this.btnRegistrar.setDisabled(true);
         this.btnModificar.setDisabled(false);
-        this.btnEliminar.setDisabled(false);
         this.txtIdEmpleado.setDisabled(true);        
     }
 
@@ -271,7 +271,6 @@ public class EmpleadoVista {
         
         this.btnRegistrar.setDisabled(false);
         this.btnModificar.setDisabled(true);
-        this.btnEliminar.setDisabled(true);
         
         this.txtIdEmpleado.setDisabled(false);
     }    
@@ -293,9 +292,15 @@ public class EmpleadoVista {
             objEmpleado.setEmail(txtEmail.getValue().toString());
             objEmpleado.setCodciudad(objCiudad);
             objEmpleado.setEdad(Integer.parseInt(txtEdad.getValue().toString()));
+            
             empleadoLogica.registrarEmpleado(objEmpleado);
+            listaEmpleados = null;
+            limpiar();
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Información de registro del Empleado.", 
+                    "El Empleado fue registrado con éxito."));
         } catch (Exception ex) {
-            Logger.getLogger(EmpleadoVista.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error.", ex.getMessage()));
         }
     }
     
@@ -316,9 +321,15 @@ public class EmpleadoVista {
             objEmpleado.setEmail(txtEmail.getValue().toString());
             objEmpleado.setCodciudad(objCiudad);
             objEmpleado.setEdad(Integer.parseInt(txtEdad.getValue().toString()));
+            
             empleadoLogica.modificarEmpleado(objEmpleado);
+            listaEmpleados = null;
+            limpiar();
+            
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Información de modificación del Empleado.", 
+                    "El Empleado fue modificado con éxito."));
         } catch (Exception ex) {
-            Logger.getLogger(EmpleadoVista.class.getName()).log(Level.SEVERE, null, ex);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error.", ex.getMessage()));
         }        
     }    
     

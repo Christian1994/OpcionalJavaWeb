@@ -46,14 +46,11 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
             throw new Exception("Debes seleccionar la ciudad en el que el Empleado vive.");
         }
         
-        Empleado objEmpleado = empleadoDAO.find(empleado.getIdcargo());
+        Empleado objEmpleado = empleadoDAO.find(empleado.getIdempleado());
         if(objEmpleado != null){
             throw new Exception("Empleado ya existe.");
         }
         else{
-            if(empleado.getIdcargo().getDescripcion().equals("GERENTE GENERAL")){
-                throw new Exception("Ya existe un Empleado Gerente General.");
-            }
             empleadoDAO.create(empleado);
         }
     }
@@ -72,15 +69,12 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
         if(empleado.getDireccion().equals("")){
             throw new Exception("Campo Dirección Empleado Obligatorio.");
         }
-        
-        // Campo Teléfono Empleado se validará en la Vista Empleado.
-        
+        if(empleado.getTelefono().equals("")){
+            throw new Exception("Campo Teléfono Empleado Obligatorio.");
+        }
         if(empleado.getEmail().equals("")){
             throw new Exception("Campo E-mail Empleado Obligatorio.");
-        }
-        
-        // Campo Edad Empleado se validará en la Vista Empleado.
-        
+        }        
         if(empleado.getIdcargo().getIdcargo() == null){
             throw new Exception("Debes seleccionar el cargo al que el Empleado va a asociarse.");
         }
@@ -88,7 +82,7 @@ public class EmpleadoLogica implements EmpleadoLogicaLocal {
             throw new Exception("Debes seleccionar la ciudad en el que el Empleado vive.");
         }
         
-        Empleado objEmpleado = empleadoDAO.find(empleado.getIdcargo());
+        Empleado objEmpleado = empleadoDAO.find(empleado.getIdempleado());
         if(objEmpleado == null){
             throw new Exception("Empleado a modificar no existe.");
         }
